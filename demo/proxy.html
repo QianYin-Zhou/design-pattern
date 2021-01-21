@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>proxy</title>
+	<style>
+		img {
+			width: 300px;
+			height: 300px;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		// 创建一个本体对象
+		var oImg = (function () {
+			// 创建标签
+			var imgNode = document.createElement('img');
+			// 添加到页面
+			document.body.appendChild(imgNode);
+			return {
+				// 设置图片的src
+				setSrc: function (src) {
+					// 更改src
+					imgNode.src = src;
+				}
+			}
+		})();
+
+		// 创建代理对象
+		var proxyImage = (function () {
+			// 创建一个新的img标签
+			var img = new Image;
+			// img 加载完成事件
+			img.onload = function () {
+				// 调用 oImg 替换src方法
+				oImg.setSrc(this.src);
+			}
+			return {
+				// 代理设置地址
+				setSrc: function (src) {
+					// 预加载 loading
+					oImg.setSrc('../img/loading.gif');
+					// 赋值正常图片地址
+					img.src = src;
+				}
+			}
+		})();
+
+		proxyImage.setSrc('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg');
+	</script>
+</body>
+
+</html>

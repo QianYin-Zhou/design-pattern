@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>not proxy</title>
+	<style>
+		img {
+			width: 300px;
+			height: 300px;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		var oImg = (function () {
+			// 创建标签
+			var imgNode = document.createElement('img');
+			// 添加到页面
+			document.body.appendChild(imgNode);
+			return {
+				// 设置图片的src
+				setSrc: function (src) {
+					// 更改src
+					imgNode.src = src;
+				}
+			}
+		})();
+
+		oImg.setSrc('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg');
+	</script>
+</body>
+
+</html>
